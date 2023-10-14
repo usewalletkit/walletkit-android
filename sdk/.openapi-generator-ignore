@@ -1,0 +1,4 @@
+# OpenAPI Generator Ignore
+# Only generate source code, not gradle configs or docs
+**
+!**.kt

@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("org.openapi.generator") version "6.6.0"
 }
 
 android {
@@ -30,6 +31,24 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.openapitools:openapi-generator-gradle-plugin:6.6.0")
+    }
+}
+
+openApiGenerate {
+    generatorName.set("kotlin")
+    remoteInputSpec.set("https://raw.githubusercontent.com/usewalletkit/api/main/docs/openapi/openapi.yml")
+    outputDir.set("$buildDir/generated")
+    packageName.set("com.usewalletkit.sdk")
+    configFile.set("$projectDir/openapi-config.yml")
 }
 
 dependencies {

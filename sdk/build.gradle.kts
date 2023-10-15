@@ -9,6 +9,8 @@ object Versions {
     const val retrofit = "2.9.0"
 }
 
+val openApiSpecUrl: String by project
+
 android {
     namespace = "com.usewalletkit.sdk"
     compileSdk = 33
@@ -50,7 +52,7 @@ buildscript {
 
 openApiGenerate {
     generatorName.set("kotlin")
-    remoteInputSpec.set("https://raw.githubusercontent.com/usewalletkit/api/main/docs/openapi/openapi.yml")
+    remoteInputSpec.set("$openApiSpecUrl")
     outputDir.set("$projectDir")
     configFile.set("$projectDir/openapi-config.yml")
 }

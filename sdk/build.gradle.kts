@@ -13,10 +13,10 @@ val openApiSpecUrl: String by project
 
 android {
     namespace = "com.usewalletkit.sdk"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -37,6 +37,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 }
 
@@ -61,19 +66,20 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.security:security-crypto:1.1.0-alpha01")
     implementation("com.google.android.material:material:1.10.0")
-
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:$version")
     implementation("com.squareup.moshi:moshi-kotlin:1.13.0")
     implementation("com.squareup.moshi:moshi-adapters:1.13.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
     implementation("com.squareup.retrofit2:retrofit:${Versions.retrofit}")
     implementation("com.squareup.retrofit2:converter-moshi:${Versions.retrofit}")
     implementation("com.squareup.retrofit2:converter-scalars:${Versions.retrofit}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$version")
 
     testImplementation("junit:junit:4.13.2")
+
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

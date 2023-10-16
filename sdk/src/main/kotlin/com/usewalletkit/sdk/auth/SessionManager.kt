@@ -11,6 +11,10 @@ class SessionManager(
 
     fun canRefreshToken(): Boolean = getSession()?.canRefreshToken() ?: false
 
+    fun isLoggedIn(): Boolean = hasValidSession() || canRefreshToken()
+
+    fun shouldRefreshToken(): Boolean = !hasValidSession() && canRefreshToken()
+
     fun storeSession(session: Session) =
         sessionStore.storeSession(SessionModel.fromSession(session))
 

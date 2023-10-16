@@ -34,6 +34,8 @@ class SessionManagerTest {
 
         assertTrue(sessionManager.hasValidSession())
         assertTrue(sessionManager.canRefreshToken())
+        assertTrue(sessionManager.isLoggedIn())
+        assertFalse(sessionManager.shouldRefreshToken())
     }
 
     @Test
@@ -49,6 +51,8 @@ class SessionManagerTest {
 
         assertFalse(sessionManager.hasValidSession())
         assertFalse(sessionManager.canRefreshToken())
+        assertFalse(sessionManager.isLoggedIn())
+        assertFalse(sessionManager.shouldRefreshToken())
     }
 
     @Test
@@ -64,6 +68,8 @@ class SessionManagerTest {
 
         assertFalse(sessionManager.hasValidSession())
         assertTrue(sessionManager.canRefreshToken())
+        assertTrue(sessionManager.isLoggedIn())
+        assertTrue(sessionManager.shouldRefreshToken())
     }
 
     @Test

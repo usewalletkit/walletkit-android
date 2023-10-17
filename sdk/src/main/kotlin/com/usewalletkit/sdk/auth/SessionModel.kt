@@ -1,7 +1,7 @@
 package com.usewalletkit.sdk.auth
 
 import android.os.Parcelable
-import com.usewalletkit.sdk.openapi.models.Session
+import com.usewalletkit.sdk.generated.models.Session
 import kotlinx.parcelize.Parcelize
 import java.time.OffsetDateTime
 

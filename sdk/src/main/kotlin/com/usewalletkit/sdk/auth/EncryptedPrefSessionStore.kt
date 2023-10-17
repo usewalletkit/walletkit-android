@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.squareup.moshi.JsonAdapter
-import com.usewalletkit.sdk.openapi.infrastructure.Serializer
+import com.usewalletkit.sdk.generated.infrastructure.Serializer
 
 class EncryptedPrefSessionStore(
     context: Context,

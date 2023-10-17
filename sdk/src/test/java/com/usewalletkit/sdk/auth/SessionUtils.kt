@@ -1,6 +1,6 @@
 package com.usewalletkit.sdk.auth
 
-import com.usewalletkit.sdk.openapi.models.Session
+import com.usewalletkit.sdk.generated.models.Session
 import java.time.OffsetDateTime
 
 fun createSessionModel(

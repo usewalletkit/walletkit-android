@@ -1,8 +1,8 @@
 package com.usewalletkit.sdk.auth
 
-import com.usewalletkit.sdk.openapi.apis.UsersApi
-import com.usewalletkit.sdk.openapi.models.Session
-import com.usewalletkit.sdk.openapi.models.UsersRefreshTokenRequest
+import com.usewalletkit.sdk.generated.apis.UsersApi
+import com.usewalletkit.sdk.generated.models.Session
+import com.usewalletkit.sdk.generated.models.UsersRefreshTokenRequest
 import kotlinx.coroutines.runBlocking
 
 

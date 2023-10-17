@@ -5,6 +5,7 @@ import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.mock
 import java.time.OffsetDateTime
 
 class SessionManagerTest {
@@ -13,7 +14,10 @@ class SessionManagerTest {
 
     @Before
     fun setup() {
-        sessionManager = SessionManager(TestSessionStore())
+        sessionManager = SessionManager(
+            sessionStore = TestSessionStore(),
+            usersApi = mock(),
+        )
     }
 
     @Test
@@ -89,5 +93,9 @@ class SessionManagerTest {
         }
 
         override fun getSession(): SessionModel? = session
+
+        override fun deleteSession() {
+            session = null
+        }
     }
 }

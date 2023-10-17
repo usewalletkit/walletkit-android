@@ -35,6 +35,13 @@ class EncryptedPrefSessionStore(
         return jsonAdapter.fromJson(serializedString)
     }
 
+    override fun deleteSession() {
+        sharedPreferences
+            .edit()
+            .remove(SESSION_SHARED_PREF_KEY)
+            .commit()
+    }
+
     companion object {
         private const val SESSION_SHARED_PREF_KEY = "session_shared_pref_key"
     }

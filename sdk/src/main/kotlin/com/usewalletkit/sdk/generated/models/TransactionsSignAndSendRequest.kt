@@ -15,7 +15,11 @@
 
 package com.usewalletkit.sdk.generated.models
 
+import com.usewalletkit.sdk.generated.models.Network
+import com.usewalletkit.sdk.generated.models.SignAndSendRequestUnsignedTransaction
+
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 

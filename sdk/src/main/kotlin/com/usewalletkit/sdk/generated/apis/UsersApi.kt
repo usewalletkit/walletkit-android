@@ -1,14 +1,13 @@
 package com.usewalletkit.sdk.generated.apis
 
 import com.usewalletkit.sdk.generated.infrastructure.CollectionFormats.*
-import retrofit2.http.*
-import retrofit2.Response
-
 import com.usewalletkit.sdk.generated.models.LoginWithEmailResponse
 import com.usewalletkit.sdk.generated.models.Session
 import com.usewalletkit.sdk.generated.models.UsersLoginWithEmailRequest
 import com.usewalletkit.sdk.generated.models.UsersRefreshTokenRequest
 import com.usewalletkit.sdk.generated.models.UsersVerifyLoginRequest
+import retrofit2.Response
+import retrofit2.http.*
 
 interface UsersApi {
     /**

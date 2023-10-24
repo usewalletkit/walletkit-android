@@ -17,6 +17,7 @@ package com.usewalletkit.sdk.generated.models
 
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 

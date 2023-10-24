@@ -1,16 +1,15 @@
 package com.usewalletkit.sdk.generated.infrastructure
 
+import com.squareup.moshi.Moshi
 import com.usewalletkit.sdk.generated.auth.HttpBearerAuth
-
 import okhttp3.Call
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import retrofit2.Retrofit
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
-import retrofit2.converter.scalars.ScalarsConverterFactory
-import com.squareup.moshi.Moshi
+import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 
 class ApiClient(
@@ -125,7 +124,7 @@ class ApiClient(
 
     companion object {
         @JvmStatic
-        protected val baseUrlKey = "com.usewalletkit.sdk.openapi.baseUrl"
+        protected val baseUrlKey = "com.usewalletkit.sdk.generated.baseUrl"
 
         @JvmStatic
         val defaultBasePath: String by lazy {

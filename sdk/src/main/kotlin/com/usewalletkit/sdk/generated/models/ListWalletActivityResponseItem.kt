@@ -15,7 +15,12 @@
 
 package com.usewalletkit.sdk.generated.models
 
+import com.usewalletkit.sdk.generated.models.ListWalletActivityResponseItemMetadata
+import com.usewalletkit.sdk.generated.models.ListWalletActivityResponseItemToken
+import com.usewalletkit.sdk.generated.models.Network
+
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 

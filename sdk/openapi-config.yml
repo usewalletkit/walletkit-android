@@ -1,6 +1,6 @@
 enumPropertyNaming: UPPERCASE
 library: jvm-retrofit2
-packageName: com.usewalletkit.sdk.openapi
+packageName: com.usewalletkit.sdk.generated
 parcelizeModels: true
 useCoroutines: true
 apiDocs: false

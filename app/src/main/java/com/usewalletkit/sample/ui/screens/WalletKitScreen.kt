@@ -14,6 +14,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -21,21 +22,44 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.usewalletkit.sample.ui.viewmodels.WalletKitViewModel
 
 @Composable
 fun WalletKitScreen(
-    onExit: () -> Unit,
+    projectId: String,
+    onCancel: () -> Unit,
 ) {
-    if (true) {
-        WalletKitLogin(onExit = onExit)
+    val viewModel: WalletKitViewModel = viewModel(
+        factory = viewModelFactory {
+            initializer {
+                WalletKitViewModel(projectId = projectId)
+            }
+        }
+    )
+
+    val currentState = viewModel.uiState.collectAsState()
+
+    if (currentState.value.isLoggedIn) {
+        WalletKitMainContent(
+            onLogout = viewModel::onLogout,
+        )
     } else {
-        WalletKitMainContent()
+        WalletKitLogin(
+            onLogin = viewModel::onLogin,
+            onLoginAnonymously = viewModel::onLoginAnonymously,
+            onExit = onCancel,
+        )
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun WalletKitLogin(
+    onLogin: (String) -> Unit,
+    onLoginAnonymously: () -> Unit,
     onExit: () -> Unit,
 ) {
     var email by rememberSaveable { mutableStateOf("") }
@@ -60,14 +84,14 @@ private fun WalletKitLogin(
             singleLine = true
         )
         Button(
-            onClick = {  },
+            onClick = { onLogin(email) },
             modifier = Modifier.fillMaxWidth(),
             enabled = email.isNotEmpty()
         ) {
             Text("Login")
         }
         Button(
-            onClick = {  },
+            onClick = onLoginAnonymously,
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text("Login Anonymously")
@@ -81,8 +105,23 @@ private fun WalletKitLogin(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun WalletKitMainContent() {
-
+private fun WalletKitMainContent(
+    onLogout: () -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 64.dp)
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text("Logged In")
+        OutlinedButton(
+            onClick = onLogout,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Logout")
+        }
+    }
 }

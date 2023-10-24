@@ -55,14 +55,17 @@ class MainActivity : ComponentActivity() {
                         onSupabaseSelected = viewModel::onSupabaseSelected,
                     )
                     MainViewModel.Provider.WALLETKIT -> WalletKitScreen(
-                        onExit = viewModel::onClear,
+                        projectId = uiState.projectId!!,
+                        onCancel = viewModel::onClear,
                     )
                     MainViewModel.Provider.FIREBASE -> FirebaseScreen(
                         projectId = uiState.projectId!!,
                         onCancel = viewModel::onClear,
                     )
                     MainViewModel.Provider.SUPABASE -> SupabaseScreen(
-                        onExit = viewModel::onClear,
+                        projectId = uiState.projectId!!,
+                        apiKey = uiState.supabaseApiKey!!,
+                        onCancel = viewModel::onClear,
                     )
                 }
             }

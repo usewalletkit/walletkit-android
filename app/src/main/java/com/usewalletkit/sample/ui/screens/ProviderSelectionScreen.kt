@@ -17,6 +17,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,10 +43,11 @@ fun ProviderSelectionScreen(
         )
         Spacer(modifier = Modifier.height(16.dp))
         TextField(
+            modifier = Modifier.fillMaxWidth(),
+            visualTransformation = PasswordVisualTransformation(),
             value = projectId,
             onValueChange = { projectId = it },
             label = { Text("WalletKit Project Id") },
-            modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
         Spacer(modifier = Modifier.height(32.dp))
@@ -70,10 +72,11 @@ fun ProviderSelectionScreen(
         }
         Spacer(modifier = Modifier.height(16.dp))
         TextField(
+            modifier = Modifier.fillMaxWidth(),
+            visualTransformation = PasswordVisualTransformation(),
             value = supabaseApiKey,
             onValueChange = { supabaseApiKey = it },
             label = { Text("Supabase Api Key") },
-            modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
         Button(

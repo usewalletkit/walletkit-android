@@ -67,7 +67,10 @@ class WalletKitViewModel(
                 )
             }
         }
+    }
 
+    fun onCancelVerification() {
+        _uiState.update { it.copy(isLoading = false, shouldVerifyCode = false) }
     }
 
     fun onLoginAnonymously() {

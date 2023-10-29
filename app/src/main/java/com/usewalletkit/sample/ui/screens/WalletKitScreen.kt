@@ -56,6 +56,12 @@ fun WalletKitScreen(
             onCreateWallets = viewModel::createWallet,
             onFetchWallets = viewModel::fetchWallets,
         )
+    } else if (currentState.value.shouldVerifyCode) {
+        WalletKitVerifyCode(
+            isLoading = currentState.value.isLoading,
+            onVerifyCode = viewModel::onVerifyCode,
+            onCancel = viewModel::onCancelVerification,
+        )
     } else {
         WalletKitLogin(
             isLoginIn = currentState.value.isLoading,
@@ -118,6 +124,51 @@ private fun WalletKitLogin(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun WalletKitVerifyCode(
+    isLoading: Boolean,
+    onVerifyCode: (String) -> Unit,
+    onCancel: () -> Unit,
+) {
+    var code by rememberSaveable { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 64.dp)
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(
+            text = "Enter email code",
+            style = MaterialTheme.typography.titleLarge,
+        )
+        Spacer(modifier = Modifier.height(32.dp))
+        TextField(
+            value = code,
+            onValueChange = { code = it },
+            label = { Text("Email Code") },
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true
+        )
+        Button(
+            onClick = { onVerifyCode(code) },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = code.isNotEmpty() && !isLoading,
+        ) {
+            Text("Verify")
+        }
+        OutlinedButton(
+            onClick = onCancel,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Cancel")
+        }
+    }
+}
+
+
 @Composable
 private fun WalletKitMainContent(
     isLoading: Boolean,
@@ -155,6 +206,9 @@ private fun WalletKitMainContent(
             Text("Loading wallets")
         } else {
             if (wallets != null) {
+                if (wallets.isEmpty()) {
+                    Text("No wallets created yet")
+                }
                 for (wallet in wallets) {
                     Text("Name: ${wallet.name}")
                     Text("Network: ${wallet.network}")

@@ -5,6 +5,7 @@ import com.usewalletkit.sdk.generated.infrastructure.ApiClient
 import com.usewalletkit.sdk.interceptors.AuthInterceptor
 import com.usewalletkit.sdk.interceptors.HeadersInterceptor
 import com.usewalletkit.sdk.login.WalletKitLoginClient
+import io.github.jan.supabase.gotrue.GoTrue
 import okhttp3.OkHttpClient
 
 class WalletKitClient private constructor(
@@ -18,6 +19,15 @@ class WalletKitClient private constructor(
         authProvider = AuthProvider.WalletKitAuthProvider(client = loginClient),
         projectId = loginClient.projectId,
         baseUrl = loginClient.baseUrl,
+    )
+    constructor(
+        loginClient: GoTrue,
+        projectId: String,
+        baseUrl: String = DEFAULT_BASE_URL,
+    ) : this(
+        authProvider = AuthProvider.SupabaseAuthProvider(client = loginClient),
+        projectId = projectId,
+        baseUrl = baseUrl,
     )
 
     private val apiClient = ApiClient(

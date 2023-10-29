@@ -1,6 +1,7 @@
 package com.usewalletkit.sdk.interceptors
 
 import com.usewalletkit.sdk.auth.AuthProvider
+import com.usewalletkit.sdk.generated.models.TokenSource
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -17,6 +18,7 @@ class AuthInterceptor(private val authProvider: AuthProvider) : Interceptor {
             // add authorization header and proceed
             val response = chain.proceedWithAuth(
                 bearerToken = checkNotNull(authProvider.getAuthToken()),
+                tokenSource = authProvider.getSource(),
             )
 
             // if unauthorized cause token expired in the meanwhile refresh token
@@ -26,6 +28,7 @@ class AuthInterceptor(private val authProvider: AuthProvider) : Interceptor {
                 // and retry
                 chain.proceedWithAuth(
                     bearerToken = checkNotNull(authProvider.getAuthToken()),
+                    tokenSource = authProvider.getSource(),
                 )
             } else {
                 response
@@ -33,9 +36,13 @@ class AuthInterceptor(private val authProvider: AuthProvider) : Interceptor {
         }
     }
 
-    private fun Interceptor.Chain.proceedWithAuth(bearerToken: String) = proceed(
+    private fun Interceptor.Chain.proceedWithAuth(
+        bearerToken: String,
+        tokenSource: TokenSource,
+    ) = proceed(
         request = request().newBuilder()
             .addHeader("Authorization", "Bearer $bearerToken")
+            .addHeader("X-WalletKit-Token-Source", "${tokenSource.value}")
             .build()
     )
 }

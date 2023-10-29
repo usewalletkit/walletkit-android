@@ -1,4 +1,4 @@
-package com.usewalletkit.sdk.auth
+package com.usewalletkit.sdk.login
 
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
@@ -32,7 +32,11 @@ class EncryptedPrefSessionStore(
 
     override fun getSession(): SessionModel? {
         val serializedString = sharedPreferences.getString(SESSION_SHARED_PREF_KEY, null)
-        return jsonAdapter.fromJson(serializedString)
+        return if (serializedString != null) {
+            jsonAdapter.fromJson(serializedString)
+        } else {
+            null
+        }
     }
 
     override fun deleteSession() {

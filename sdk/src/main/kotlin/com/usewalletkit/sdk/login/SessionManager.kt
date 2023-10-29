@@ -1,9 +1,7 @@
-package com.usewalletkit.sdk.auth
+package com.usewalletkit.sdk.login
 
 import com.usewalletkit.sdk.generated.apis.UsersApi
 import com.usewalletkit.sdk.generated.models.Session
-import com.usewalletkit.sdk.generated.models.UsersRefreshTokenRequest
-import kotlinx.coroutines.runBlocking
 
 
 class SessionManager(
@@ -24,22 +22,11 @@ class SessionManager(
 
     fun getAuthToken(): String = getSession()!!.accessToken
 
-    fun refreshToken() {
-        runBlocking {
-            usersApi.usersRefreshToken(
-                usersRefreshTokenRequest = UsersRefreshTokenRequest(
-                    sessionId = getSessionId(),
-                    refreshToken = getRefreshToken()
-                ),
-            )
-        }
-    }
+    fun getRefreshToken(): String = getSession()!!.refreshToken
+
+    fun getSessionId(): String = getSession()!!.id
 
     fun logout() = sessionStore.deleteSession()
-
-    private fun getRefreshToken(): String = getSession()!!.refreshToken
-
-    private fun getSessionId(): String = getSession()!!.id
 
     private fun getSession(): SessionModel? = sessionStore.getSession()
 }

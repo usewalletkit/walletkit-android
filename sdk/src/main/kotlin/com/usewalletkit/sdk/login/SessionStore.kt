@@ -1,4 +1,4 @@
-package com.usewalletkit.sdk.auth
+package com.usewalletkit.sdk.login
 
 interface SessionStore {
     fun storeSession(session: SessionModel)

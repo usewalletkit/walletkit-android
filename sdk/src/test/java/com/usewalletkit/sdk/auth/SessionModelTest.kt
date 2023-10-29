@@ -1,6 +1,7 @@
 package com.usewalletkit.sdk.auth
 
 import com.usewalletkit.sdk.generated.models.Session
+import com.usewalletkit.sdk.login.SessionModel
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue

@@ -2,6 +2,8 @@ package com.usewalletkit.sdk.auth
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.usewalletkit.sdk.login.EncryptedPrefSessionStore
+import com.usewalletkit.sdk.login.SessionModel
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith

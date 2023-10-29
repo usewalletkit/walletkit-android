@@ -1,4 +1,4 @@
-package com.usewalletkit.sdk.auth
+package com.usewalletkit.sdk.login
 
 import android.os.Parcelable
 import com.usewalletkit.sdk.generated.models.Session

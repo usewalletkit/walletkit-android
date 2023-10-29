@@ -50,6 +50,7 @@ class MainActivity : ComponentActivity() {
                     MainViewModel.Provider.UNSPECIFIED -> ProviderSelectionScreen(
                         lastProjectId = uiState.projectId,
                         lastSupabaseApiKey = uiState.supabaseApiKey,
+                        lastSupabaseProjectUrl = uiState.supabaseProjectUrl,
                         onWalletKitSelected = viewModel::onWalletKitSelected,
                         onFirebaseSelected = viewModel::onFirebaseSelected,
                         onSupabaseSelected = viewModel::onSupabaseSelected,
@@ -65,6 +66,7 @@ class MainActivity : ComponentActivity() {
                     MainViewModel.Provider.SUPABASE -> SupabaseScreen(
                         projectId = uiState.projectId!!,
                         apiKey = uiState.supabaseApiKey!!,
+                        projectUrl = uiState.supabaseProjectUrl!!,
                         onCancel = viewModel::onClear,
                     )
                 }

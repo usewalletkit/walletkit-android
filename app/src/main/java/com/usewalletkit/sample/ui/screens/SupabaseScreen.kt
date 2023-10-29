@@ -27,11 +27,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.usewalletkit.sample.ui.viewmodels.SupabaseViewModel
+import com.usewalletkit.sdk.generated.models.ListWalletsResponseItem
 
 @Composable
 fun SupabaseScreen(
     projectId: String,
     apiKey: String,
+    projectUrl: String,
     onCancel: () -> Unit,
 ) {
     val viewModel: SupabaseViewModel = viewModel(
@@ -40,6 +42,7 @@ fun SupabaseScreen(
                 SupabaseViewModel(
                     projectId = projectId,
                     apiKey = apiKey,
+                    projectUrl = projectUrl,
                 )
             }
         }
@@ -49,10 +52,15 @@ fun SupabaseScreen(
 
     if (currentState.value.isLoggedIn) {
         SupabaseMainContent(
+            isLoading = currentState.value.isLoading,
+            wallets = currentState.value.wallets,
+            onFetchWallets = viewModel::fetchWallets,
+            onCreateWallets = viewModel::createWallet,
             onLogout = viewModel::onLogout,
         )
     } else {
         SupabaseLogin(
+            isLoading = currentState.value.isLoading,
             onLogin = viewModel::onLogin,
             onExit = onCancel,
         )
@@ -62,6 +70,7 @@ fun SupabaseScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SupabaseLogin(
+    isLoading: Boolean,
     onLogin: (String, String) -> Unit,
     onExit: () -> Unit,
 ) {
@@ -98,7 +107,7 @@ private fun SupabaseLogin(
         Button(
             onClick = { onLogin(email, password) },
             modifier = Modifier.fillMaxWidth(),
-            enabled = password.isNotEmpty() && email.isNotEmpty()
+            enabled = password.isNotEmpty() && email.isNotEmpty() && !isLoading
         ) {
             Text("Login")
         }
@@ -111,8 +120,13 @@ private fun SupabaseLogin(
     }
 }
 
+
 @Composable
 private fun SupabaseMainContent(
+    isLoading: Boolean,
+    wallets: List<ListWalletsResponseItem>?,
+    onFetchWallets: () -> Unit,
+    onCreateWallets: () -> Unit,
     onLogout: () -> Unit,
 ) {
     Column(
@@ -122,12 +136,37 @@ private fun SupabaseMainContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text("Logged In")
+        Button(
+            onClick = onFetchWallets,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Fetch wallets")
+        }
+        Button(
+            onClick = onCreateWallets,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Create wallets")
+        }
         OutlinedButton(
             onClick = onLogout,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Logout")
+        }
+        if (isLoading) {
+            Text("Loading wallets")
+        } else {
+            if (wallets != null) {
+                if (wallets.isEmpty()) {
+                    Text("No wallets created yet")
+                }
+                for (wallet in wallets) {
+                    Text("Name: ${wallet.name}")
+                    Text("Network: ${wallet.network}")
+                    Text("Address: ${wallet.address}")
+                }
+            }
         }
     }
 }

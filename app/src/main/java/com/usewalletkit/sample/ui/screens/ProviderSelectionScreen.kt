@@ -25,12 +25,14 @@ import androidx.compose.ui.unit.dp
 fun ProviderSelectionScreen(
     lastProjectId: String?,
     lastSupabaseApiKey: String?,
+    lastSupabaseProjectUrl: String?,
     onWalletKitSelected: (String) -> Unit,
     onFirebaseSelected: (String) -> Unit,
-    onSupabaseSelected: (String, String) -> Unit,
+    onSupabaseSelected: (String, String, String) -> Unit,
 ) {
     var projectId by rememberSaveable { mutableStateOf(lastProjectId ?: "") }
     var supabaseApiKey by rememberSaveable { mutableStateOf(lastSupabaseApiKey ?: "") }
+    var supabaseProjectUrl by rememberSaveable { mutableStateOf(lastSupabaseProjectUrl ?: "") }
     val buttonsEnabled = projectId.isNotEmpty()
 
     Column(
@@ -79,12 +81,21 @@ fun ProviderSelectionScreen(
             label = { Text("Supabase Api Key") },
             singleLine = true
         )
+        TextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = supabaseProjectUrl,
+            onValueChange = { supabaseProjectUrl = it },
+            label = { Text("Supabase Project Url") },
+            singleLine = true
+        )
         Button(
             onClick = {
-                onSupabaseSelected(projectId, supabaseApiKey)
+                onSupabaseSelected(projectId, supabaseApiKey, supabaseProjectUrl)
             },
             modifier = Modifier.fillMaxWidth(),
-            enabled = buttonsEnabled && supabaseApiKey.isNotEmpty(),
+            enabled = buttonsEnabled &&
+                    supabaseApiKey.isNotEmpty() &&
+                    supabaseProjectUrl.isNotEmpty(),
         ) {
             Text("Login with Supabase")
         }

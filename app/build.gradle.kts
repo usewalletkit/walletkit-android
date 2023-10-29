@@ -62,6 +62,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("io.github.jan-tennert.supabase:gotrue-kt:1.4.1")
+    implementation("io.ktor:ktor-client-android:2.3.5")
+
     implementation(project(mapOf("path" to ":sdk")))
 
     testImplementation("junit:junit:4.13.2")

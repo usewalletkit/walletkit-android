@@ -32,11 +32,12 @@ class MainViewModel(private val sharedPrefs: SharedPreferences) : ViewModel() {
         )
     }
 
-    fun onSupabaseSelected(projectId: String, apiKey: String) {
+    fun onSupabaseSelected(projectId: String, apiKey: String, projectUrl: String) {
         saveState(
             provider = Provider.SUPABASE,
             projectId = projectId,
             supabaseApiKey = apiKey,
+            supabaseProjectUrl = projectUrl,
         )
     }
 
@@ -48,8 +49,16 @@ class MainViewModel(private val sharedPrefs: SharedPreferences) : ViewModel() {
         provider: Provider,
         projectId: String? = uiState.value.projectId,
         supabaseApiKey: String? = uiState.value.supabaseApiKey,
+        supabaseProjectUrl: String? = uiState.value.supabaseProjectUrl,
     ) {
-        _uiState.update { MainUiState(provider, projectId, supabaseApiKey) }
+        _uiState.update {
+            MainUiState(
+                provider = provider,
+                projectId = projectId,
+                supabaseApiKey = supabaseApiKey,
+                supabaseProjectUrl = supabaseProjectUrl
+            )
+        }
         val stateJson = Gson().toJson(uiState.value)
         sharedPrefs
             .edit()
@@ -71,6 +80,7 @@ class MainViewModel(private val sharedPrefs: SharedPreferences) : ViewModel() {
         val provider: Provider = Provider.UNSPECIFIED,
         val projectId: String? = null,
         val supabaseApiKey: String? = null,
+        val supabaseProjectUrl: String? = null,
     )
 
     enum class Provider {

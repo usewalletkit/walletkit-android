@@ -168,7 +168,6 @@ private fun WalletKitVerifyCode(
     }
 }
 
-
 @Composable
 private fun WalletKitMainContent(
     isLoading: Boolean,

@@ -22,10 +22,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.usewalletkit.sample.ui.viewmodels.WalletKitViewModel
+import com.usewalletkit.sdk.generated.models.ListWalletsResponseItem
 
 @Composable
 fun WalletKitScreen(
@@ -35,7 +37,11 @@ fun WalletKitScreen(
     val viewModel: WalletKitViewModel = viewModel(
         factory = viewModelFactory {
             initializer {
-                WalletKitViewModel(projectId = projectId)
+                val application = checkNotNull(this[APPLICATION_KEY])
+                WalletKitViewModel(
+                    projectId = projectId,
+                    context = application.applicationContext,
+                )
             }
         }
     )
@@ -44,10 +50,15 @@ fun WalletKitScreen(
 
     if (currentState.value.isLoggedIn) {
         WalletKitMainContent(
+            isLoading = currentState.value.isLoading,
+            wallets = currentState.value.wallets,
             onLogout = viewModel::onLogout,
+            onCreateWallets = viewModel::createWallet,
+            onFetchWallets = viewModel::fetchWallets,
         )
     } else {
         WalletKitLogin(
+            isLoginIn = currentState.value.isLoading,
             onLogin = viewModel::onLogin,
             onLoginAnonymously = viewModel::onLoginAnonymously,
             onExit = onCancel,
@@ -58,6 +69,7 @@ fun WalletKitScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun WalletKitLogin(
+    isLoginIn: Boolean,
     onLogin: (String) -> Unit,
     onLoginAnonymously: () -> Unit,
     onExit: () -> Unit,
@@ -86,13 +98,14 @@ private fun WalletKitLogin(
         Button(
             onClick = { onLogin(email) },
             modifier = Modifier.fillMaxWidth(),
-            enabled = email.isNotEmpty()
+            enabled = email.isNotEmpty() && !isLoginIn,
         ) {
             Text("Login")
         }
         Button(
             onClick = onLoginAnonymously,
             modifier = Modifier.fillMaxWidth(),
+            enabled = !isLoginIn,
         ) {
             Text("Login Anonymously")
         }
@@ -107,6 +120,10 @@ private fun WalletKitLogin(
 
 @Composable
 private fun WalletKitMainContent(
+    isLoading: Boolean,
+    wallets: List<ListWalletsResponseItem>?,
+    onFetchWallets: () -> Unit,
+    onCreateWallets: () -> Unit,
     onLogout: () -> Unit,
 ) {
     Column(
@@ -116,12 +133,34 @@ private fun WalletKitMainContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text("Logged In")
+        Button(
+            onClick = onFetchWallets,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Fetch wallets")
+        }
+        Button(
+            onClick = onCreateWallets,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Create wallets")
+        }
         OutlinedButton(
             onClick = onLogout,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Logout")
+        }
+        if (isLoading) {
+            Text("Loading wallets")
+        } else {
+            if (wallets != null) {
+                for (wallet in wallets) {
+                    Text("Name: ${wallet.name}")
+                    Text("Network: ${wallet.network}")
+                    Text("Address: ${wallet.address}")
+                }
+            }
         }
     }
 }

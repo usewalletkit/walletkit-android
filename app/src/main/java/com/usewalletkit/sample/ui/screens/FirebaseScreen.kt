@@ -119,6 +119,16 @@ private fun FirebaseMainContent(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text("Logged In")
+        Button(
+            onClick = {}
+        ) {
+            Text("Fetch wallets")
+        }
+        Button(
+            onClick = {}
+        ) {
+            Text("Create wallets")
+        }
         OutlinedButton(
             onClick = onLogout,
             modifier = Modifier.fillMaxWidth()

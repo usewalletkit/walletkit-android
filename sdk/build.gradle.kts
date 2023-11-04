@@ -63,12 +63,13 @@ openApiGenerate {
 }
 
 dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.security:security-crypto:1.1.0-alpha01")
     implementation("com.google.android.material:material:1.10.0")
-    implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
+    implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.squareup.moshi:moshi-kotlin:1.13.0")
     implementation("com.squareup.moshi:moshi-adapters:1.13.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")

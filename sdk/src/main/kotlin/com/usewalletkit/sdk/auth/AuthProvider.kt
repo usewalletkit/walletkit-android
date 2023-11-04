@@ -1,8 +1,11 @@
 package com.usewalletkit.sdk.auth
 
+import com.google.firebase.auth.FirebaseAuth
 import com.usewalletkit.sdk.generated.models.TokenSource
 import com.usewalletkit.sdk.login.WalletKitLoginClient
 import io.github.jan.supabase.gotrue.GoTrue
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
 import kotlinx.datetime.Clock
 
 sealed interface AuthProvider {
@@ -52,5 +55,26 @@ sealed interface AuthProvider {
         override suspend fun logout() = client.logout()
 
         private fun currentSession() = client.currentSessionOrNull()
+    }
+
+    class FirebaseAuthProvider(
+        private val auth: FirebaseAuth,
+    ) : AuthProvider {
+        override fun shouldRefreshToken() = runBlocking {
+            val token = auth.getAccessToken(false).await()
+            token.expirationTimestamp > System.currentTimeMillis()
+        }
+
+        override fun getSource() = TokenSource.FIREBASE
+
+        override suspend fun refreshToken() {
+            auth.getAccessToken(true).await().token
+        }
+
+        override suspend fun getAuthToken() = auth.getAccessToken(false).await().token
+
+        override suspend fun isLoggedIn() = auth.currentUser != null
+
+        override suspend fun logout() = auth.signOut()
     }
 }

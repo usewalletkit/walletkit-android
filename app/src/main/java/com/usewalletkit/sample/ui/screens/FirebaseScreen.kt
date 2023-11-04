@@ -27,6 +27,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.usewalletkit.sample.ui.viewmodels.FirebaseViewModel
+import com.usewalletkit.sdk.generated.models.ListWalletsResponseItem
 
 @Composable
 fun FirebaseScreen(
@@ -45,6 +46,10 @@ fun FirebaseScreen(
 
     if (currentState.value.isLoggedIn) {
         FirebaseMainContent(
+            isLoading = currentState.value.isLoading,
+            wallets = currentState.value.wallets,
+            onFetchWallets = viewModel::fetchWallets,
+            onCreateWallets = viewModel::createWallet,
             onLogout = viewModel::onLogout,
         )
     } else {
@@ -109,6 +114,10 @@ private fun FirebaseLogin(
 
 @Composable
 private fun FirebaseMainContent(
+    isLoading: Boolean,
+    wallets: List<ListWalletsResponseItem>?,
+    onFetchWallets: () -> Unit,
+    onCreateWallets: () -> Unit,
     onLogout: () -> Unit,
 ) {
     Column(
@@ -118,14 +127,15 @@ private fun FirebaseMainContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text("Logged In")
         Button(
-            onClick = {}
+            onClick = onFetchWallets,
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Fetch wallets")
         }
         Button(
-            onClick = {}
+            onClick = onCreateWallets,
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Create wallets")
         }
@@ -134,6 +144,20 @@ private fun FirebaseMainContent(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Logout")
+        }
+        if (isLoading) {
+            Text("Loading wallets")
+        } else {
+            if (wallets != null) {
+                if (wallets.isEmpty()) {
+                    Text("No wallets created yet")
+                }
+                for (wallet in wallets) {
+                    Text("Name: ${wallet.name}")
+                    Text("Network: ${wallet.network}")
+                    Text("Address: ${wallet.address}")
+                }
+            }
         }
     }
 }

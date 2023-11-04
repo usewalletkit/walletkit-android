@@ -1,5 +1,6 @@
 package com.usewalletkit.sdk
 
+import com.google.firebase.auth.FirebaseAuth
 import com.usewalletkit.sdk.auth.AuthProvider
 import com.usewalletkit.sdk.generated.infrastructure.ApiClient
 import com.usewalletkit.sdk.interceptors.AuthInterceptor
@@ -26,6 +27,15 @@ class WalletKitClient private constructor(
         baseUrl: String = DEFAULT_BASE_URL,
     ) : this(
         authProvider = AuthProvider.SupabaseAuthProvider(client = loginClient),
+        projectId = projectId,
+        baseUrl = baseUrl,
+    )
+    constructor(
+        firebaseAuth: FirebaseAuth,
+        projectId: String,
+        baseUrl: String = DEFAULT_BASE_URL,
+    ) : this(
+        authProvider = AuthProvider.FirebaseAuthProvider(auth = firebaseAuth),
         projectId = projectId,
         baseUrl = baseUrl,
     )

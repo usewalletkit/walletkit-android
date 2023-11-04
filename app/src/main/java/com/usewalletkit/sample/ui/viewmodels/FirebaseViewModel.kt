@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.update
 
 class FirebaseViewModel(projectId: String) : ViewModel() {
 
-    private var auth: FirebaseAuth = Firebase.auth
+    private val auth: FirebaseAuth = Firebase.auth
 
     private val walletKitClient = WalletKitClient(
         firebaseAuth = auth,

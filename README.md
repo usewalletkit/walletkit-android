@@ -1,6 +1,6 @@
 # walletkit-android
 
-## Use the SDK
+## Getting Started
 ### Initialize the login client and login
 WalletKit supports different auth providers:
 - WalletKit (native)

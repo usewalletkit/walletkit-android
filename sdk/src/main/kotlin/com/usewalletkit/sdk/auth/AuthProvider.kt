@@ -37,6 +37,13 @@ sealed interface AuthProvider {
     class SupabaseAuthProvider(
         private val client: GoTrue,
     ) : AuthProvider {
+
+        init {
+            runBlocking {
+                client.loadFromStorage()
+            }
+        }
+
         override fun shouldRefreshToken(): Boolean {
             val currentSession = currentSession()
             val currentTimestamp = Clock.System.now().toEpochMilliseconds()

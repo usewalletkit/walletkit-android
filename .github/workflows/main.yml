@@ -7,7 +7,7 @@ on:
     branches: [ $default-branch ]
 
 jobs:
-  build:
+  build-and-test:
 
     runs-on: ubuntu-latest
 

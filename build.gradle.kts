@@ -4,4 +4,17 @@ plugins {
     id("com.android.library") version "8.1.2" apply false
     id("com.google.gms.google-services") version "4.4.0" apply false
     id("org.jetbrains.kotlin.android") version "1.8.10" apply false
+    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+}
+
+group = "com.usewalletkit.sdk"
+version = System.getenv("SDK_RELEASE_VERSION")
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+        }
+    }
 }

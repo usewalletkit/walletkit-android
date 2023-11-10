@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("org.openapi.generator") version "6.6.0"
+    id("maven-publish")
+    id("signing")
 }
 
 object Versions {
@@ -62,6 +64,47 @@ openApiGenerate {
     configFile.set("$projectDir/openapi-config.yml")
 }
 
+signing {
+    sign(publishing.publications)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = "com.usewalletkit.sdk"
+            artifactId = "sdk"
+            version = System.getenv("SDK_RELEASE_VERSION")
+            afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
+
+            pom {
+                name.set("sdk")
+                description.set("Official WalletKit SDK<")
+                url.set("https://usewalletkit.com")
+                licenses {
+                    license {
+                        name.set("The Apache Software License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("emanuelconunaemme")
+                        name.set("Emanuel Mazzilli")
+                        email.set("emanuel.mazzilli@gmail.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/usewalletkit/walletkit-android.git")
+                    developerConnection.set(
+                        "scm:git:ssh://github.com:usewalletkit/walletkit-android.git"
+                    )
+                    url.set("https://github.com/usewalletkit/walletkit-android/tree/main")
+                }
+            }
+        }
+    }
+}
+
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
 
@@ -83,7 +126,6 @@ dependencies {
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
-
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

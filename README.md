@@ -116,6 +116,18 @@ if (response.isSuccessful && response.body() != null) {
 All the services and endpoints can be found in the SDK package 
 `com.usewalletkit.sdk.generated.apis`.
 
+## Running the sample app
+You can run the sample app to test the wallet kit login. On the initial screen you can choose the 
+login method between WalletKit, Firebase and Supabase.
+
+NOTE: in order to use Firebase you will need to override the mock config under 
+`app/google-services.json` with the one from your project.
+
+The app is for showcase only and it supports two api calls: fetch wallets and create wallet. Good 
+places to learn how to interact with the API are the ViewModels: WalletKitViewModel
+FirebaseViewModel and SupabaseViewModel.
+
+
 ## Contributing
 ### OpenApi Generator
 Api classes and models are auto-generated with openapi-generator. To update the schema, run `

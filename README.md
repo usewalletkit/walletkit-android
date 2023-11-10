@@ -1,6 +1,28 @@
 # walletkit-android
 
 ## Getting Started
+### Import library
+Check the releases on this page for the `latest_version`
+
+#### Gradle
+```groovy
+implementation group: 'com.usewalletkit.sdk', name: 'sdk', version: '<latest_version>'
+```
+
+#### Gradle DLS
+```kotlin
+implementation("com.usewalletkit.sdk:sdk:<latest_version>")
+```
+
+#### Maven
+```xml
+<dependency>
+    <groupId>com.usewalletkit.sdk</groupId>
+    <artifactId>sdk</artifactId>
+    <version>latest_version</version>
+</dependency>
+```
+
 ### Initialize the login client and login
 WalletKit supports different auth providers:
 - WalletKit (native)

@@ -81,7 +81,7 @@ publishing {
 
             pom {
                 name.set("sdk")
-                description.set("Official WalletKit SDK<")
+                description.set("Official WalletKit SDK")
                 url.set("https://usewalletkit.com")
                 licenses {
                     license {

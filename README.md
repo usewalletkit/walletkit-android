@@ -158,4 +158,7 @@ Api classes and models are auto-generated with openapi-generator. To update the 
 `sdk/gradle.properties` and can be changed there. To run the generator with a temporary url without 
 changing the property, it is possible to run 
 `./gradlew openApiGenerate -PopenApiSpecUrl=<your_url>`.
- 
+
+## Releases
+The SDK is released to the Maven Central repository by the github action triggered on release 
+(source `.github/workflows/release.yml`). So, Maven versioning in in sync with github versioning. 

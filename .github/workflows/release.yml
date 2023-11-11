@@ -23,4 +23,4 @@ jobs:
           ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.OSSRH_PASSWORD }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SDK_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SDK_SIGNING_PASSWORD }}
-          SDK_RELEASE_VERSION: ${{ env.GITHUB_REF }}
+          SDK_RELEASE_VERSION: ${{ github.ref }}

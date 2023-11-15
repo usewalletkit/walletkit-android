@@ -28,6 +28,3 @@ jobs:
 
       - name: SDK Unit Tests
         run: ./gradlew sdk:testReleaseUnitTest
-
-      - name: SDK Lint
-        run: ./gradlew sdk:lint

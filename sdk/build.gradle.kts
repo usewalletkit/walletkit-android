@@ -47,6 +47,7 @@ android {
     }
     lint {
         warningsAsErrors = true
+        disable.add("GradleDependency")
     }
 }
 

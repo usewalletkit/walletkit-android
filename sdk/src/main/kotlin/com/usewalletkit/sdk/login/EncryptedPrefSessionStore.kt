@@ -27,7 +27,7 @@ class EncryptedPrefSessionStore(
         sharedPreferences
             .edit()
             .putString(SESSION_SHARED_PREF_KEY, serializedString)
-            .commit()
+            .apply()
     }
 
     override fun getSession(): SessionModel? {
@@ -43,7 +43,7 @@ class EncryptedPrefSessionStore(
         sharedPreferences
             .edit()
             .remove(SESSION_SHARED_PREF_KEY)
-            .commit()
+            .apply()
     }
 
     companion object {

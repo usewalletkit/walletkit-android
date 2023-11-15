@@ -84,6 +84,5 @@ class WalletKitLoginClient(
 
     companion object {
         private const val DEFAULT_BASE_URL = "https://testnet.usewalletkit.com"
-        private const val REFRESH_TOKEN_THRESHOLD_SEC = 30
     }
 }

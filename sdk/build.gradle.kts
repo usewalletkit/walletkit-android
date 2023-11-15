@@ -45,6 +45,9 @@ android {
             isIncludeAndroidResources = true
         }
     }
+    lint {
+        warningsAsErrors = true
+    }
 }
 
 buildscript {

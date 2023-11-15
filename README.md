@@ -151,6 +151,10 @@ FirebaseViewModel and SupabaseViewModel.
 
 
 ## Contributing
+### Guidelines
+To contribute and extend the SDK, PR against `main` branch should be submitted. The PR should pass 
+the lint check and all the tests. The PR require an approval from the core team to be merged. 
+
 ### OpenApi Generator
 Api classes and models are auto-generated with openapi-generator. To update the schema, run `
 ./gradlew openApiGenerate`. This will update the files under 
@@ -162,3 +166,4 @@ changing the property, it is possible to run
 ## Releases
 The SDK is released to the Maven Central repository by the github action triggered on release 
 (source `.github/workflows/release.yml`). So, Maven versioning in in sync with github versioning. 
+The version format is `X.X.X` (E.g.: 0.0.1).

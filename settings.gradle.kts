@@ -15,5 +15,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "WalletKit"
-include(":app")
+include(":example")
 include(":sdk")

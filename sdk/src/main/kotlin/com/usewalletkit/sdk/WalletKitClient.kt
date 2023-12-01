@@ -50,6 +50,8 @@ class WalletKitClient private constructor(
 
     suspend fun isLoggedIn() = authProvider.isLoggedIn()
 
+    suspend fun getOwnerId() = authProvider.getOwnerId()
+
     fun <S> getService(serviceClass: Class<S>): S =
         apiClient.createService(serviceClass = serviceClass)
 

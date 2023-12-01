@@ -77,6 +77,8 @@ class WalletKitLoginClient(
     }
 
     fun getAuthToken(): String? = sessionManager.getAuthToken()
+
+    fun getOwnerId(): String? = sessionManager.getOwnerId()
     fun isLoggedIn(): Boolean = sessionManager.hasValidSession()
     fun logout() = sessionManager.logout()
 

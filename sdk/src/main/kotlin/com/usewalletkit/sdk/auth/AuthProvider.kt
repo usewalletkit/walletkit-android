@@ -14,6 +14,7 @@ sealed interface AuthProvider {
     suspend fun refreshToken()
     suspend fun getAuthToken(): String?
     suspend fun isLoggedIn(): Boolean
+    suspend fun getOwnerId(): String?
     suspend fun logout()
 
     class WalletKitAuthProvider(
@@ -30,6 +31,8 @@ sealed interface AuthProvider {
         override suspend fun getAuthToken() = client.getAuthToken()
 
         override suspend fun isLoggedIn() = client.isLoggedIn()
+
+        override suspend fun getOwnerId() = client.getOwnerId()
 
         override suspend fun logout() = client.logout()
     }
@@ -59,6 +62,8 @@ sealed interface AuthProvider {
 
         override suspend fun isLoggedIn() = client.currentSessionOrNull() != null
 
+        override suspend fun getOwnerId() = client.currentSessionOrNull()?.user?.id
+
         override suspend fun logout() = client.logout()
 
         private fun currentSession() = client.currentSessionOrNull()
@@ -81,6 +86,8 @@ sealed interface AuthProvider {
         override suspend fun getAuthToken() = auth.getAccessToken(false).await().token
 
         override suspend fun isLoggedIn() = auth.currentUser != null
+
+        override suspend fun getOwnerId() = auth.currentUser?.uid
 
         override suspend fun logout() = auth.signOut()
     }

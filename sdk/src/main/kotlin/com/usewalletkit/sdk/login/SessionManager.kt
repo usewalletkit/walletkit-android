@@ -22,6 +22,8 @@ class SessionManager(
 
     fun getAuthToken(): String = getSession()!!.accessToken
 
+    fun getOwnerId(): String = getSession()!!.userId
+
     fun getRefreshToken(): String = getSession()!!.refreshToken
 
     fun getSessionId(): String = getSession()!!.id

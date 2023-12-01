@@ -93,7 +93,7 @@ class SupabaseViewModel(
                         controlMode = WalletControlMode.USER,
                         developerSecret = "testnet-secret",
                         userPin = "111111",
-                        ownerId = "426ce30e-cdef-40e3-8981-773de834e4a3"
+                        ownerId = walletKitClient.getOwnerId(),
                     )
                 )
             _uiState.update { it.copy(isLoading = false) }

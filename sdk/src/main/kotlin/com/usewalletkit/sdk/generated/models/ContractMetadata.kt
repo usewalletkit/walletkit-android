@@ -15,7 +15,10 @@
 
 package com.usewalletkit.sdk.generated.models
 
+import com.usewalletkit.sdk.generated.models.ContractType
 import com.usewalletkit.sdk.generated.models.Network
+import com.usewalletkit.sdk.generated.models.NftCollection
+import com.usewalletkit.sdk.generated.models.Token
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -27,12 +30,16 @@ import kotlinx.parcelize.Parcelize
  *
  * @param network 
  * @param address 
- * @param userPin A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet.
+ * @param type 
+ * @param name 
+ * @param logoUrl 
+ * @param token 
+ * @param nft 
  */
 @Parcelize
 
 
-data class ExportWalletRequest (
+data class ContractMetadata (
 
     @Json(name = "network")
     val network: Network,
@@ -40,9 +47,20 @@ data class ExportWalletRequest (
     @Json(name = "address")
     val address: kotlin.String,
 
-    /* A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet. */
-    @Json(name = "user_pin")
-    val userPin: kotlin.String?
+    @Json(name = "type")
+    val type: ContractType,
+
+    @Json(name = "name")
+    val name: kotlin.String? = null,
+
+    @Json(name = "logo_url")
+    val logoUrl: kotlin.String? = null,
+
+    @Json(name = "token")
+    val token: Token? = null,
+
+    @Json(name = "nft")
+    val nft: NftCollection? = null
 
 ) : Parcelable
 

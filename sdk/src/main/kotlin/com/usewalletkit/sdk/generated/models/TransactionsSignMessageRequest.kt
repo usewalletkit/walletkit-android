@@ -26,35 +26,26 @@ import kotlinx.parcelize.Parcelize
  * 
  *
  * @param network 
- * @param from from address of the transfer
- * @param contractAddress collection contract address
- * @param recipient recipient of the NFT transfer
- * @param tokenId 
+ * @param signerWalletAddress address can only be the ones created in the project.
+ * @param message message to be signed.
  * @param developerSecret On testnet, the developer_secret is always \"testnet-secret\". On mainnet, the developer_secret is set by the developer during account activation.
  * @param userPin A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet.
  */
 @Parcelize
 
 
-data class NftsTransferNftRequest (
+data class TransactionsSignMessageRequest (
 
     @Json(name = "network")
     val network: Network,
 
-    /* from address of the transfer */
-    @Json(name = "from")
-    val from: kotlin.String,
+    /* address can only be the ones created in the project. */
+    @Json(name = "signer_wallet_address")
+    val signerWalletAddress: kotlin.String,
 
-    /* collection contract address */
-    @Json(name = "contract_address")
-    val contractAddress: kotlin.String,
-
-    /* recipient of the NFT transfer */
-    @Json(name = "recipient")
-    val recipient: kotlin.String,
-
-    @Json(name = "token_id")
-    val tokenId: kotlin.String? = null,
+    /* message to be signed. */
+    @Json(name = "message")
+    val message: kotlin.String,
 
     /* On testnet, the developer_secret is always \"testnet-secret\". On mainnet, the developer_secret is set by the developer during account activation. */
     @Json(name = "developer_secret")

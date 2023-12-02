@@ -16,6 +16,7 @@
 package com.usewalletkit.sdk.generated.models
 
 import com.usewalletkit.sdk.generated.models.Network
+import com.usewalletkit.sdk.generated.models.UnsignedTransaction
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -26,23 +27,23 @@ import kotlinx.parcelize.Parcelize
  * 
  *
  * @param network 
- * @param address 
- * @param userPin A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet.
+ * @param from sender of the transaction.
+ * @param unsignedTransaction 
  */
 @Parcelize
 
 
-data class ExportWalletRequest (
+data class TransactionsPreviewRequest (
 
     @Json(name = "network")
     val network: Network,
 
-    @Json(name = "address")
-    val address: kotlin.String,
+    /* sender of the transaction. */
+    @Json(name = "from")
+    val from: kotlin.String,
 
-    /* A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet. */
-    @Json(name = "user_pin")
-    val userPin: kotlin.String?
+    @Json(name = "unsigned_transaction")
+    val unsignedTransaction: UnsignedTransaction
 
 ) : Parcelable
 

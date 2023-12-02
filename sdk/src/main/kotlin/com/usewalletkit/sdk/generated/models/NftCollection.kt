@@ -26,23 +26,30 @@ import kotlinx.parcelize.Parcelize
  * 
  *
  * @param network 
- * @param address 
- * @param userPin A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet.
+ * @param contractAddress 
+ * @param name 
+ * @param imageUrl 
+ * @param symbol 
  */
 @Parcelize
 
 
-data class ExportWalletRequest (
+data class NftCollection (
 
     @Json(name = "network")
     val network: Network,
 
-    @Json(name = "address")
-    val address: kotlin.String,
+    @Json(name = "contract_address")
+    val contractAddress: kotlin.String,
 
-    /* A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet. */
-    @Json(name = "user_pin")
-    val userPin: kotlin.String?
+    @Json(name = "name")
+    val name: kotlin.String,
+
+    @Json(name = "image_url")
+    val imageUrl: kotlin.String,
+
+    @Json(name = "symbol")
+    val symbol: kotlin.String? = null
 
 ) : Parcelable
 

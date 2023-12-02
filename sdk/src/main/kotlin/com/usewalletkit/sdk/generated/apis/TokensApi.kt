@@ -6,9 +6,10 @@ import retrofit2.Response
 import okhttp3.RequestBody
 import com.squareup.moshi.Json
 
-import com.usewalletkit.sdk.generated.models.GetTokenResponse
+import com.usewalletkit.sdk.generated.models.ErrorResponse
 import com.usewalletkit.sdk.generated.models.ListTokenBalancesResponseItem
 import com.usewalletkit.sdk.generated.models.Network
+import com.usewalletkit.sdk.generated.models.Token
 import com.usewalletkit.sdk.generated.models.TokensBatchTransferRequest
 import com.usewalletkit.sdk.generated.models.TokensCreateRequest
 import com.usewalletkit.sdk.generated.models.TokensMintRequest
@@ -18,10 +19,13 @@ import com.usewalletkit.sdk.generated.models.TransactionSubmissionResponse
 interface TokensApi {
     /**
      * Batch Transfer Token
-     * Batch transfers from the &#x60;from&#x60; wallet to the list of  &#x60;recipients&#x60; with the provided amount. The &#x60;from&#x60; address can only be the ones  created in the project. Transfers within a batch are processed atomically  in a single transaction, resulting in significantly lower average costs  compared to individual transfers 
+     * Batch transfers from the &#x60;from&#x60; wallet to the list of &#x60;recipients&#x60; with the provided amount. The &#x60;from&#x60; address can only be the ones created in the project. Transfers within a batch are processed atomically in a single transaction, resulting in significantly lower average costs compared to individual transfers 
      * Responses:
      *  - 200: 
      *  - 400: 
+     *  - 401: 
+     *  - 403: 
+     *  - 500: 
      *
      * @param tokensBatchTransferRequest 
      * @return [TransactionSubmissionResponse]
@@ -35,6 +39,9 @@ interface TokensApi {
      * Responses:
      *  - 200: 
      *  - 400: 
+     *  - 401: 
+     *  - 403: 
+     *  - 500: 
      *
      * @param tokensCreateRequest 
      * @return [TransactionSubmissionResponse]
@@ -48,13 +55,16 @@ interface TokensApi {
      * Responses:
      *  - 200: 
      *  - 400: 
+     *  - 401: 
+     *  - 403: 
+     *  - 500: 
      *
      * @param network 
      * @param token token contract address or symbol in case of the gas token
-     * @return [GetTokenResponse]
+     * @return [Token]
      */
     @GET("tokens/tokens")
-    suspend fun tokensGet(@Query("network") network: Network, @Query("token") token: kotlin.String): Response<GetTokenResponse>
+    suspend fun tokensGet(@Query("network") network: Network, @Query("token") token: kotlin.String): Response<Token>
 
     /**
      * List Token Balances
@@ -62,6 +72,9 @@ interface TokensApi {
      * Responses:
      *  - 200: 
      *  - 400: 
+     *  - 401: 
+     *  - 403: 
+     *  - 500: 
      *
      * @param network 
      * @param walletAddress 
@@ -76,6 +89,9 @@ interface TokensApi {
      * Responses:
      *  - 200: 
      *  - 400: 
+     *  - 401: 
+     *  - 403: 
+     *  - 500: 
      *
      * @param tokensMintRequest 
      * @return [TransactionSubmissionResponse]
@@ -89,6 +105,9 @@ interface TokensApi {
      * Responses:
      *  - 200: 
      *  - 400: 
+     *  - 401: 
+     *  - 403: 
+     *  - 500: 
      *
      * @param tokensTransferRequest 
      * @return [TransactionSubmissionResponse]

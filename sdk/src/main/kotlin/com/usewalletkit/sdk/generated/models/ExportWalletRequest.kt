@@ -27,7 +27,7 @@ import kotlinx.parcelize.Parcelize
  *
  * @param network 
  * @param address 
- * @param userPin A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet.
+ * @param userPin A 6-digit numeric pin that is only known to the user, set during  wallet creation. This pin is required to sign transactions from  this wallet.
  */
 @Parcelize
 
@@ -40,7 +40,7 @@ data class ExportWalletRequest (
     @Json(name = "address")
     val address: kotlin.String,
 
-    /* A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet. */
+    /* A 6-digit numeric pin that is only known to the user, set during  wallet creation. This pin is required to sign transactions from  this wallet. */
     @Json(name = "user_pin")
     val userPin: kotlin.String?
 

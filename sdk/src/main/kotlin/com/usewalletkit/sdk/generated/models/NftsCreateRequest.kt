@@ -31,7 +31,7 @@ import kotlinx.parcelize.Parcelize
  * @param imageUrl URL to the collection logo image
  * @param baseUri Base URI for computing tokenURI which resolves to token metadata JSON. If set, the resulting URI for each token will be the concatenation of the baseURI and the tokenId (or tokenURI if tokenURI is set when minting the NFT).
  * @param developerSecret On testnet, the developer_secret is always \"testnet-secret\". On mainnet, the developer_secret is set by the developer during account activation.
- * @param userPin A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet.
+ * @param userPin A 6-digit numeric pin that is only known to the user, set during  wallet creation. This pin is required to sign transactions from  this wallet.
  */
 @Parcelize
 
@@ -61,7 +61,7 @@ data class NftsCreateRequest (
     @Json(name = "developer_secret")
     val developerSecret: kotlin.String? = null,
 
-    /* A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet. */
+    /* A 6-digit numeric pin that is only known to the user, set during  wallet creation. This pin is required to sign transactions from  this wallet. */
     @Json(name = "user_pin")
     val userPin: kotlin.String? = null
 

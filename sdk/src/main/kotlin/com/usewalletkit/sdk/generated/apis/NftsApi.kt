@@ -6,10 +6,10 @@ import retrofit2.Response
 import okhttp3.RequestBody
 import com.squareup.moshi.Json
 
-import com.usewalletkit.sdk.generated.models.ErrorResponse
+import com.usewalletkit.sdk.generated.models.GetNftCollectionResponse
+import com.usewalletkit.sdk.generated.models.ListNftCollectionsResponseItem
+import com.usewalletkit.sdk.generated.models.ListNftsResponseItem
 import com.usewalletkit.sdk.generated.models.Network
-import com.usewalletkit.sdk.generated.models.Nft
-import com.usewalletkit.sdk.generated.models.NftCollection
 import com.usewalletkit.sdk.generated.models.NftImageUploadResponse
 import com.usewalletkit.sdk.generated.models.NftsCreateRequest
 import com.usewalletkit.sdk.generated.models.NftsMintNftRequest
@@ -23,9 +23,6 @@ interface NftsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param nftsCreateRequest 
      * @return [TransactionSubmissionResponse]
@@ -39,16 +36,13 @@ interface NftsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param network  (optional)
      * @param collectionAddress address of the NFT contract (optional)
-     * @return [NftCollection]
+     * @return [GetNftCollectionResponse]
      */
     @GET("nfts/collection-by-address")
-    suspend fun nftsGetNftCollection(@Query("network") network: Network? = null, @Query("collection_address") collectionAddress: kotlin.String? = null): Response<NftCollection>
+    suspend fun nftsGetNftCollection(@Query("network") network: Network? = null, @Query("collection_address") collectionAddress: kotlin.String? = null): Response<GetNftCollectionResponse>
 
     /**
      * List NFT Collections
@@ -56,18 +50,15 @@ interface NftsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param network 
      * @param walletAddress 
      * @param page page number starting from 1 (optional)
      * @param pageSize size of each page (optional)
-     * @return [kotlin.collections.List<NftCollection>]
+     * @return [kotlin.collections.List<ListNftCollectionsResponseItem>]
      */
     @GET("nfts/collections")
-    suspend fun nftsListNftCollections(@Query("network") network: Network, @Query("wallet_address") walletAddress: kotlin.String, @Query("page") page: kotlin.Int? = null, @Query("page_size") pageSize: kotlin.Int? = null): Response<kotlin.collections.List<NftCollection>>
+    suspend fun nftsListNftCollections(@Query("network") network: Network, @Query("wallet_address") walletAddress: kotlin.String, @Query("page") page: kotlin.Int? = null, @Query("page_size") pageSize: kotlin.Int? = null): Response<kotlin.collections.List<ListNftCollectionsResponseItem>>
 
     /**
      * List NFTs
@@ -75,19 +66,16 @@ interface NftsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param network 
      * @param walletAddress query by wallet address. If provided, contract_address should not be set. (optional)
      * @param contractAddress query by collection address. If provided, wallet_address should not be set. (optional)
      * @param page page number, starting from 1 (optional)
      * @param pageSize size of each page (optional)
-     * @return [kotlin.collections.List<Nft>]
+     * @return [kotlin.collections.List<ListNftsResponseItem>]
      */
     @GET("nfts")
-    suspend fun nftsListNfts(@Query("network") network: Network, @Query("wallet_address") walletAddress: kotlin.String? = null, @Query("contract_address") contractAddress: kotlin.String? = null, @Query("page") page: kotlin.Int? = null, @Query("page_size") pageSize: kotlin.Int? = null): Response<kotlin.collections.List<Nft>>
+    suspend fun nftsListNfts(@Query("network") network: Network, @Query("wallet_address") walletAddress: kotlin.String? = null, @Query("contract_address") contractAddress: kotlin.String? = null, @Query("page") page: kotlin.Int? = null, @Query("page_size") pageSize: kotlin.Int? = null): Response<kotlin.collections.List<ListNftsResponseItem>>
 
     /**
      * Mint NFT
@@ -95,9 +83,6 @@ interface NftsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param nftsMintNftRequest 
      * @return [TransactionSubmissionResponse]
@@ -111,9 +96,6 @@ interface NftsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @return [NftImageUploadResponse]
      */
@@ -126,9 +108,6 @@ interface NftsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param nftsTransferNftRequest 
      * @return [TransactionSubmissionResponse]

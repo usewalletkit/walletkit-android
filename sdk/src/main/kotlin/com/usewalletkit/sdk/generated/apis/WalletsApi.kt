@@ -9,9 +9,10 @@ import com.squareup.moshi.Json
 import com.usewalletkit.sdk.generated.models.ChangeUserPinRequest
 import com.usewalletkit.sdk.generated.models.ChangeUserPinResponse
 import com.usewalletkit.sdk.generated.models.CreateWalletRequest
-import com.usewalletkit.sdk.generated.models.ErrorResponse
+import com.usewalletkit.sdk.generated.models.CreateWalletResponse
 import com.usewalletkit.sdk.generated.models.ExportWalletRequest
 import com.usewalletkit.sdk.generated.models.ExportWalletResponse
+import com.usewalletkit.sdk.generated.models.ListWalletsResponseItem
 import com.usewalletkit.sdk.generated.models.Network
 import com.usewalletkit.sdk.generated.models.Wallet
 
@@ -22,9 +23,6 @@ interface WalletsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param changeUserPinRequest 
      * @return [ChangeUserPinResponse]
@@ -38,15 +36,12 @@ interface WalletsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param createWalletRequest 
-     * @return [Wallet]
+     * @return [CreateWalletResponse]
      */
     @POST("wallets")
-    suspend fun walletsCreate(@Body createWalletRequest: CreateWalletRequest): Response<Wallet>
+    suspend fun walletsCreate(@Body createWalletRequest: CreateWalletRequest): Response<CreateWalletResponse>
 
     /**
      * Export Wallet
@@ -54,9 +49,6 @@ interface WalletsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param exportWalletRequest 
      * @return [ExportWalletResponse]
@@ -70,9 +62,6 @@ interface WalletsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param network 
      * @param address 
@@ -87,9 +76,6 @@ interface WalletsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param network 
      * @param id 
@@ -104,9 +90,6 @@ interface WalletsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param network 
      * @return [Wallet]
@@ -120,9 +103,6 @@ interface WalletsApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param network 
      * @param ownerID 
@@ -136,17 +116,13 @@ interface WalletsApi {
      * Lists wallets created in the project. Supports filter by network.
      * Responses:
      *  - 200: 
-     *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param network  (optional)
      * @param page  (optional)
      * @param pageSize  (optional)
-     * @return [kotlin.collections.List<Wallet>]
+     * @return [kotlin.collections.List<ListWalletsResponseItem>]
      */
     @GET("wallets")
-    suspend fun walletsList(@Query("network") network: Network? = null, @Query("page") page: kotlin.Int? = null, @Query("page_size") pageSize: kotlin.String? = null): Response<kotlin.collections.List<Wallet>>
+    suspend fun walletsList(@Query("network") network: Network? = null, @Query("page") page: kotlin.Int? = null, @Query("page_size") pageSize: kotlin.String? = null): Response<kotlin.collections.List<ListWalletsResponseItem>>
 
 }

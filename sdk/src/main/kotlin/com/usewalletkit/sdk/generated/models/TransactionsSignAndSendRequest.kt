@@ -16,7 +16,7 @@
 package com.usewalletkit.sdk.generated.models
 
 import com.usewalletkit.sdk.generated.models.Network
-import com.usewalletkit.sdk.generated.models.UnsignedTransaction
+import com.usewalletkit.sdk.generated.models.SignAndSendRequestUnsignedTransaction
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -30,7 +30,7 @@ import kotlinx.parcelize.Parcelize
  * @param signerWalletAddress address can only be the ones created in the project.
  * @param unsignedTransaction 
  * @param developerSecret On testnet, the developer_secret is always \"testnet-secret\". On mainnet, the developer_secret is set by the developer during account activation.
- * @param userPin A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet.
+ * @param userPin A 6-digit numeric pin that is only known to the user, set during  wallet creation. This pin is required to sign transactions from  this wallet.
  */
 @Parcelize
 
@@ -45,13 +45,13 @@ data class TransactionsSignAndSendRequest (
     val signerWalletAddress: kotlin.String,
 
     @Json(name = "unsigned_transaction")
-    val unsignedTransaction: UnsignedTransaction,
+    val unsignedTransaction: SignAndSendRequestUnsignedTransaction,
 
     /* On testnet, the developer_secret is always \"testnet-secret\". On mainnet, the developer_secret is set by the developer during account activation. */
     @Json(name = "developer_secret")
     val developerSecret: kotlin.String? = null,
 
-    /* A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet. */
+    /* A 6-digit numeric pin that is only known to the user, set during  wallet creation. This pin is required to sign transactions from  this wallet. */
     @Json(name = "user_pin")
     val userPin: kotlin.String? = null
 

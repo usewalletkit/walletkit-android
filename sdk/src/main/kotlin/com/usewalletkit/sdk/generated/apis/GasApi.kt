@@ -7,7 +7,6 @@ import okhttp3.RequestBody
 import com.squareup.moshi.Json
 
 import com.usewalletkit.sdk.generated.models.BuyGasResponse
-import com.usewalletkit.sdk.generated.models.ErrorResponse
 import com.usewalletkit.sdk.generated.models.GasBuyRequest
 
 interface GasApi {
@@ -17,9 +16,6 @@ interface GasApi {
      * Responses:
      *  - 200: 
      *  - 400: 
-     *  - 401: 
-     *  - 403: 
-     *  - 500: 
      *
      * @param gasBuyRequest 
      * @return [BuyGasResponse]

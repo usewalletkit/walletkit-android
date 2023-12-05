@@ -20,6 +20,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
 /**
  * 
@@ -52,7 +53,7 @@ data class UsersVerifyLoginRequest (
     val sessionChallengeCode: kotlin.String? = null,
 
     @Json(name = "passkey_credential_assertion_response")
-    val passkeyCredentialAssertionResponse: kotlin.String? = null
+    val passkeyCredentialAssertionResponse: @RawValue kotlin.Any? = null
 
 ) : Parcelable
 

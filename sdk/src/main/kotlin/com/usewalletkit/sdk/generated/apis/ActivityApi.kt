@@ -6,6 +6,7 @@ import retrofit2.Response
 import okhttp3.RequestBody
 import com.squareup.moshi.Json
 
+import com.usewalletkit.sdk.generated.models.ErrorResponse
 import com.usewalletkit.sdk.generated.models.ListWalletActivityResponseItem
 import com.usewalletkit.sdk.generated.models.Network
 
@@ -16,6 +17,9 @@ interface ActivityApi {
      * Responses:
      *  - 200: 
      *  - 400: 
+     *  - 401: 
+     *  - 403: 
+     *  - 500: 
      *
      * @param network 
      * @param walletAddress 

@@ -1,4 +1,11 @@
 # OpenAPI Generator Ignore
 # Only generate source code, not gradle configs or docs
-**
-!**.kt
+**.md
+build.gradle
+docs/**
+gradle/**
+gradlew
+gradlew.bat
+settings.gradle
+# This file generates and error, so it has to be updated manually
+**/UsersVerifyLoginRequest.kt

@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.usewalletkit.sdk.WalletKitClient
 import com.usewalletkit.sdk.generated.apis.WalletsApi
 import com.usewalletkit.sdk.generated.models.CreateWalletRequest
-import com.usewalletkit.sdk.generated.models.ListWalletsResponseItem
 import com.usewalletkit.sdk.generated.models.Network
+import com.usewalletkit.sdk.generated.models.Wallet
 import com.usewalletkit.sdk.generated.models.WalletControlMode
 import com.usewalletkit.sdk.login.WalletKitLoginClient
 import kotlinx.coroutines.GlobalScope
@@ -134,6 +134,6 @@ class WalletKitViewModel(
         val isLoading: Boolean = false,
         val shouldVerifyCode: Boolean = false,
         val userId: String? = null,
-        val wallets: List<ListWalletsResponseItem>? = null,
+        val wallets: List<Wallet>? = null,
     )
 }

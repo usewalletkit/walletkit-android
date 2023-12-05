@@ -27,7 +27,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.usewalletkit.sample.ui.viewmodels.WalletKitViewModel
-import com.usewalletkit.sdk.generated.models.ListWalletsResponseItem
+import com.usewalletkit.sdk.generated.models.Wallet
 
 @Composable
 fun WalletKitScreen(
@@ -171,7 +171,7 @@ private fun WalletKitVerifyCode(
 @Composable
 private fun WalletKitMainContent(
     isLoading: Boolean,
-    wallets: List<ListWalletsResponseItem>?,
+    wallets: List<Wallet>?,
     onFetchWallets: () -> Unit,
     onCreateWallets: () -> Unit,
     onLogout: () -> Unit,

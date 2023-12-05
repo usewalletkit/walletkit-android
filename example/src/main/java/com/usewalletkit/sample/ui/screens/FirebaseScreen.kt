@@ -27,7 +27,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.usewalletkit.sample.ui.viewmodels.FirebaseViewModel
-import com.usewalletkit.sdk.generated.models.ListWalletsResponseItem
+import com.usewalletkit.sdk.generated.models.Wallet
 
 @Composable
 fun FirebaseScreen(
@@ -115,7 +115,7 @@ private fun FirebaseLogin(
 @Composable
 private fun FirebaseMainContent(
     isLoading: Boolean,
-    wallets: List<ListWalletsResponseItem>?,
+    wallets: List<Wallet>?,
     onFetchWallets: () -> Unit,
     onCreateWallets: () -> Unit,
     onLogout: () -> Unit,

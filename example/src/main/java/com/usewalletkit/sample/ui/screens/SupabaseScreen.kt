@@ -27,7 +27,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.usewalletkit.sample.ui.viewmodels.SupabaseViewModel
-import com.usewalletkit.sdk.generated.models.ListWalletsResponseItem
+import com.usewalletkit.sdk.generated.models.Wallet
 
 @Composable
 fun SupabaseScreen(
@@ -124,7 +124,7 @@ private fun SupabaseLogin(
 @Composable
 private fun SupabaseMainContent(
     isLoading: Boolean,
-    wallets: List<ListWalletsResponseItem>?,
+    wallets: List<Wallet>?,
     onFetchWallets: () -> Unit,
     onCreateWallets: () -> Unit,
     onLogout: () -> Unit,

@@ -7,8 +7,8 @@ import com.google.firebase.ktx.Firebase
 import com.usewalletkit.sdk.WalletKitClient
 import com.usewalletkit.sdk.generated.apis.WalletsApi
 import com.usewalletkit.sdk.generated.models.CreateWalletRequest
-import com.usewalletkit.sdk.generated.models.ListWalletsResponseItem
 import com.usewalletkit.sdk.generated.models.Network
+import com.usewalletkit.sdk.generated.models.Wallet
 import com.usewalletkit.sdk.generated.models.WalletControlMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -93,6 +93,6 @@ class FirebaseViewModel(projectId: String) : ViewModel() {
     data class FirebaseUiState(
         val isLoggedIn: Boolean,
         val isLoading: Boolean = false,
-        val wallets: List<ListWalletsResponseItem>? = null,
+        val wallets: List<Wallet>? = null,
     )
 }
